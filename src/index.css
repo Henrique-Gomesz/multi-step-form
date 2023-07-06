@@ -43,3 +43,22 @@ body {
   margin: 0;
 
 }
+::-webkit-scrollbar {
+  width: 0;
+  background-color: transparent;
+}
+
+/* Preenchimento da barra de rolagem */
+::-webkit-scrollbar-thumb {
+  background-color: transparent;
+}
+
+/* Canto da barra de rolagem */
+::-webkit-scrollbar-corner {
+  background-color: transparent;
+}
+
+/* Barra de rolagem do track */
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}

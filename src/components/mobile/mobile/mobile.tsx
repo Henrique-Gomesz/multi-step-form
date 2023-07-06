@@ -16,12 +16,18 @@ import { MobileStep } from "../step/step";
 import { useState } from "react";
 import { PersonalInfo } from "../personal-info/personal-info";
 import { UserInformationErrors } from "../../../entities/user-infomation-errors/user-informarion.errors";
+import { SelectedPlain } from "../select-plan/select-plan";
 
 const STEPS = [1, 2, 3, 4];
 
 export const Mobile = () => {
   const [step, setStep] = useState(1);
 
+  const [cards, setCards] = useState({
+    arcade: false,
+    advanced: false,
+    pro: false,
+  });
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -31,6 +37,21 @@ export const Mobile = () => {
       nameError: false,
       phoneError: false,
     });
+  const [switchState, setSwitchState] = useState(false);
+
+
+  const handleCards = (cards: {
+    arcade: boolean;
+    advanced: boolean;
+    pro: boolean;
+  }) => {
+    setCards(cards);
+  };
+
+
+  const handleSwitch = (value: boolean) => {
+    setSwitchState(value);
+  };
 
   const onUserInformarionSubmit = (
     name: string,
@@ -98,6 +119,32 @@ export const Mobile = () => {
     });
   };
 
+  const getStepComponent = () => {
+    const mapComponents = [
+      <PersonalInfo
+        phone={phone}
+        name={name}
+        handlePhone={handlePhone}
+        handleName={handleName}
+        handleEmail={handleEmail}
+        email={email}
+        clearError={clearUserInformationError}
+        errors={userInformationErrors}
+        onButtonPress={onUserInformarionSubmit}
+      />,
+      <SelectedPlain
+        switchValue={switchState}
+        handleSwitch={handleSwitch}
+        cardsValue={cards}
+        handleCards={handleCards}
+        incrementStep={incrementStep}
+        goBack={decrementStep}
+      />,
+    ];
+
+    return mapComponents[step - 1];
+  };
+
   return (
     <MainWrapper>
       <ImageWrapper>
@@ -110,19 +157,7 @@ export const Mobile = () => {
           src={MobileBanner}
         ></img>
         <StepsWrapper>{renderStepsDisplay()}</StepsWrapper>
-        <CardWrapper>
-          <PersonalInfo
-            phone={phone}
-            name={name}
-            handlePhone={handlePhone}
-            handleName={handleName}
-            handleEmail={handleEmail}
-            email={email}
-            clearError={clearUserInformationError}
-            errors={userInformationErrors}
-            onButtonPress={onUserInformarionSubmit}
-          />
-        </CardWrapper>
+        <CardWrapper>{getStepComponent()}</CardWrapper>
       </ImageWrapper>
       <ContentSeparator></ContentSeparator>
       <ButtonsWrapper hasGoBack={step !== 1}>

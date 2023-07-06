@@ -9,13 +9,14 @@ export const MainWrapper = styled(Box)`
 `;
 
 export const ImageWrapper = styled(Box)`
-  background-color: red;
+ 
   margin: 0px;
   padding: 0px;
   max-width: 900px;
   position: relative;
   justify-content: center;
   display: flex;
+  
 `;
 
 export const ContentSeparator = styled(Box)`
@@ -45,7 +46,8 @@ export const StepWrapper = styled(Box)<{ hasPadding: boolean }>`
 `;
 
 export const ButtonsWrapper = styled(Box)<{ hasGoBack: boolean }>`
-  margin-top: auto;
+  margin-top: 68vh;
+  position: relative;
   display: flex;
   justify-content: ${(props) =>
     props.hasGoBack ? "space-between" : "flex-end"};
