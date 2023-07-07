@@ -36,9 +36,6 @@ interface Props {
 
 export const SelectedPlain = ({
   hasError,
-
-  goBack,
-  incrementStep,
   cardsValue,
   handleSwitch,
   switchValue,
@@ -78,13 +75,6 @@ export const SelectedPlain = ({
   const changeSwitch = (konobOnLeft: boolean) => {
     if (konobOnLeft) return handleSwitch(false);
     return handleSwitch(true);
-  };
-
-  const onNextStep = () => {
-    if (cardsValue.advanced || cardsValue.arcade || cardsValue.pro)
-      return incrementStep();
-
-    setHasError(true);
   };
 
   return (

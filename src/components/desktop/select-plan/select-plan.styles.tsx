@@ -1,5 +1,5 @@
+import { Box, Button } from "@mui/material";
 import { styled } from "styled-components";
-import { Box, Switch as BaseSwitch, Button } from "@mui/material";
 
 export const MainWrapper = styled(Box)`
   display: flex;

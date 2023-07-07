@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { UserInformationErrors } from "../../../entities/user-infomation-errors/user-informarion.errors";
 import {
   BaseInput,
   Button,
@@ -11,7 +11,6 @@ import {
   Title,
   TitleWrapper,
 } from "./your-info.styles";
-import { UserInformationErrors } from "../../../entities/user-infomation-errors/user-informarion.errors";
 
 interface Props {
   onButtonPress: (name: string, email: string, telephone: string) => void;

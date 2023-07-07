@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { CheckboxItem } from "../checkbox-item/checkbox-item";
 import {
   ButtonsWrapper,

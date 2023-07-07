@@ -1,4 +1,4 @@
-import { Box, Button, Divider } from "@mui/material";
+import { Box } from "@mui/material";
 import { styled } from "styled-components";
 
 export const MainWrapper = styled(Box)`
@@ -60,7 +60,6 @@ export const PlanText = styled.p`
 `;
 
 export const ChangePlan = styled.p`
-
   color: hsl(231, 11%, 63%);
   font-weight: 400;
   font-size: 4vw;
@@ -106,7 +105,6 @@ export const TotalWrapper = styled(Box)`
   width: 100%;
   padding: 6px;
   justify-content: space-between;
-  
 `;
 
 export const TotalLabel = styled.p`

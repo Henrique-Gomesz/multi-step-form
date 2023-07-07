@@ -1,12 +1,8 @@
-import { useState } from "react";
 import { CheckboxItem } from "../checkbox-item/checkbox-item";
 import {
-  ButtonsWrapper,
   CardsWrapper,
-  GoBack,
   IndividualCardWrapper,
   MainWrapper,
-  NextStep,
   Subtitle,
   SubtitleWrapper,
   Title,
@@ -31,8 +27,6 @@ export interface AddOnsProps {
 }
 
 export const AddOns = ({
-  goBack,
-  incrementStep,
   handleServices,
   services,
 }: AddOnsProps) => {
@@ -53,21 +47,13 @@ export const AddOns = ({
     }
   };
 
-  const onNextStep = () => {
-    incrementStep();
-  };
-
-  const onGoBack = () => {
-    goBack();
-  };
-
   return (
     <MainWrapper>
       <TitleWrapper>
         <Title>{"Pick add-ons"}</Title>
       </TitleWrapper>
       <SubtitleWrapper>
-        <Subtitle >{"Add-ons help enhance your gaming experience"}</Subtitle>
+        <Subtitle>{"Add-ons help enhance your gaming experience"}</Subtitle>
       </SubtitleWrapper>
 
       <CardsWrapper>
@@ -99,7 +85,6 @@ export const AddOns = ({
           />
         </IndividualCardWrapper>
       </CardsWrapper>
-    
     </MainWrapper>
   );
 };

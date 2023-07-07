@@ -13,7 +13,7 @@ import {
 import MobileBanner from "../../../assets/images/mobile/bg-sidebar-mobile.svg";
 import { MobileStep } from "../step/step";
 
-import { useState, useTransition } from "react";
+import { useState } from "react";
 import { PlanTypes } from "../../../entities/plain-card/plain-card";
 import { UserInformationErrors } from "../../../entities/user-infomation-errors/user-informarion.errors";
 import { AddOns } from "../add-ons/add-ons";
@@ -49,10 +49,6 @@ export const Mobile = () => {
     largerStorage: false,
     customizableProfile: false,
   });
-
-  const handleHasSelectedPlanError = (newValue: boolean) => {
-    setHasSelectedPlanError(newValue);
-  };
 
   const handleCards = (cards: {
     arcade: boolean;

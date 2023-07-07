@@ -1,12 +1,9 @@
 import { PlanTypes } from "../../../entities/plain-card/plain-card";
 import {
-  ButtonsWrapper,
   ChangePlan,
   ContentDivider,
   CustomServicesWrapper,
-  GoBack,
   MainWrapper,
-  NextStep,
   PlanPrice,
   PlanText,
   PlanTextWrapper,
@@ -36,8 +33,7 @@ export const FinishingUp = ({
   onChangePress,
   plan,
   services,
-  goBack,
-  onConfirm,
+
   isYearly,
 }: FinishingUpProps) => {
   const getPlanText = () => {
