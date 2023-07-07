@@ -13,7 +13,7 @@ import {
 import MobileBanner from "../../../assets/images/mobile/bg-sidebar-mobile.svg";
 import { MobileStep } from "../step/step";
 
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import { PlanTypes } from "../../../entities/plain-card/plain-card";
 import { UserInformationErrors } from "../../../entities/user-infomation-errors/user-informarion.errors";
 import { AddOns } from "../add-ons/add-ons";
@@ -27,6 +27,7 @@ const STEPS = [1, 2, 3, 4];
 export const Mobile = () => {
   const [step, setStep] = useState(1);
   const [finished, setFinished] = useState(false);
+  const [hasSelectedPlanError, setHasSelectedPlanError] = useState(false);
   const [cards, setCards] = useState({
     arcade: false,
     advanced: false,
@@ -49,11 +50,16 @@ export const Mobile = () => {
     customizableProfile: false,
   });
 
+  const handleHasSelectedPlanError = (newValue: boolean) => {
+    setHasSelectedPlanError(newValue);
+  };
+
   const handleCards = (cards: {
     arcade: boolean;
     advanced: boolean;
     pro: boolean;
   }) => {
+    setHasSelectedPlanError(false);
     setCards(cards);
   };
 
@@ -85,6 +91,12 @@ export const Mobile = () => {
     return true;
   };
 
+  const selectCardVerification = () => {
+    if (cards.advanced || cards.arcade || cards.pro) return true;
+    setHasSelectedPlanError(true);
+    return false;
+  };
+
   const clearUserInformationError = () => {
     return setUserInformationErrors({
       emailError: false,
@@ -106,7 +118,12 @@ export const Mobile = () => {
   };
 
   const onNextStep = () => {
-    if (onUserInformarionSubmit(name, email, phone) === true) incrementStep();
+    if (step === 1)
+      if (onUserInformarionSubmit(name, email, phone) === true)
+        return incrementStep();
+    if (step === 2) if (selectCardVerification()) return incrementStep();
+
+    incrementStep();
   };
 
   const incrementStep = () => {
@@ -177,6 +194,7 @@ export const Mobile = () => {
         onButtonPress={onUserInformarionSubmit}
       />,
       <SelectedPlain
+        hasError={hasSelectedPlanError}
         switchValue={switchState}
         handleSwitch={handleSwitch}
         cardsValue={cards}

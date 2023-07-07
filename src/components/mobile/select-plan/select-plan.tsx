@@ -1,19 +1,16 @@
-import { useState } from "react";
+import IosSwitchMaterialUi from "ios-switch-material-ui";
 import {
   PaymentsPlan,
   PlanTypes,
 } from "../../../entities/plain-card/plain-card";
 import { PlanCard } from "../plain-card/plain-card";
 import {
-  ButtonsWrapper,
   CardsWrapper,
   ErrorMessage,
   ErrorWrapper,
-  GoBack,
   IndividualCardWrapper,
   MainWrapper,
   Monthly,
-  NextStep,
   Subtitle,
   SubtitleWrapper,
   SwitchButtonWrapper,
@@ -22,7 +19,6 @@ import {
   TitleWrapper,
   Yearly,
 } from "./select-plan.styles";
-import IosSwitchMaterialUi from "ios-switch-material-ui";
 
 interface Props {
   goBack: () => void;
@@ -35,9 +31,12 @@ interface Props {
   }) => void;
   switchValue: boolean;
   handleSwitch: (value: boolean) => void;
+  hasError: boolean;
 }
 
 export const SelectedPlain = ({
+  hasError,
+
   goBack,
   incrementStep,
   cardsValue,
@@ -45,15 +44,12 @@ export const SelectedPlain = ({
   switchValue,
   handleCards,
 }: Props) => {
-  const [hasError, setHasError] = useState(false);
-
   const getPaymentPlan = () => {
     if (switchValue) return PaymentsPlan.yearly;
     return PaymentsPlan.monthly;
   };
 
   const onCardClick = (planType: PlanTypes) => {
-    setHasError(false);
     switch (planType) {
       case PlanTypes.advanced:
         handleCards({
