@@ -117,7 +117,10 @@ export const Mobile = () => {
     if (step === 1)
       if (onUserInformarionSubmit(name, email, phone) === true)
         return incrementStep();
-    if (step === 2) if (selectCardVerification()) return incrementStep();
+      else return;
+    if (step === 2)
+      if (selectCardVerification()) return incrementStep();
+      else return;
 
     incrementStep();
   };
