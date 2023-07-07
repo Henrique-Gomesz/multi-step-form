@@ -4,8 +4,8 @@ import { styled } from "styled-components";
 export const StepWrapper = styled(Box)<{ isActive: boolean }>`
   border: 1px solid;
   border-radius: 180px;
-  width: 6vw;
-  height: 6vw;
+  width: 5vw;
+  height: 5vw;
   padding: 6px;
   justify-content: center;
   align-items: center;

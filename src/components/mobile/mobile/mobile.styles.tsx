@@ -26,7 +26,7 @@ export const ContentSeparator = styled(Box)`
 
 export const CardWrapper = styled(Box)`
   background-color: white;
-  top: 26vw;
+  top: 19vw;
   display: flex;
   width: 92vw;
   border-radius: 8px;
@@ -46,7 +46,7 @@ export const StepWrapper = styled(Box)<{ hasPadding: boolean }>`
 `;
 
 export const ButtonsWrapper = styled(Box)<{ hasGoBack: boolean }>`
-  margin-top: 68vh;
+  margin-top: auto;
   position: relative;
   display: flex;
   justify-content: ${(props) =>

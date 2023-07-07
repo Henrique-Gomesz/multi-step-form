@@ -14,15 +14,19 @@ import MobileBanner from "../../../assets/images/mobile/bg-sidebar-mobile.svg";
 import { MobileStep } from "../step/step";
 
 import { useState } from "react";
-import { PersonalInfo } from "../personal-info/personal-info";
+import { PlanTypes } from "../../../entities/plain-card/plain-card";
 import { UserInformationErrors } from "../../../entities/user-infomation-errors/user-informarion.errors";
+import { AddOns } from "../add-ons/add-ons";
+import { FinishingUp } from "../finishing-up/finishing-up";
+import { PersonalInfo } from "../personal-info/personal-info";
 import { SelectedPlain } from "../select-plan/select-plan";
+import { ThankYou } from "../thank-you/thank-you";
 
 const STEPS = [1, 2, 3, 4];
 
 export const Mobile = () => {
   const [step, setStep] = useState(1);
-
+  const [finished, setFinished] = useState(false);
   const [cards, setCards] = useState({
     arcade: false,
     advanced: false,
@@ -39,6 +43,11 @@ export const Mobile = () => {
     });
   const [switchState, setSwitchState] = useState(false);
 
+  const [services, setServices] = useState({
+    onlineService: false,
+    largerStorage: false,
+    customizableProfile: false,
+  });
 
   const handleCards = (cards: {
     arcade: boolean;
@@ -47,7 +56,6 @@ export const Mobile = () => {
   }) => {
     setCards(cards);
   };
-
 
   const handleSwitch = (value: boolean) => {
     setSwitchState(value);
@@ -102,7 +110,9 @@ export const Mobile = () => {
   };
 
   const incrementStep = () => {
-    if (step < 4) setStep((previus) => previus + 1);
+    console.log(step);
+    if (step === 4) setFinished(true);
+    if (step <= 4) setStep((previus) => previus + 1);
   };
 
   const decrementStep = () => {
@@ -119,7 +129,41 @@ export const Mobile = () => {
     });
   };
 
+  const getPlan = () => {
+    if (cards.advanced) return PlanTypes.advanced;
+    if (cards.arcade) return PlanTypes.arcade;
+    if (cards.pro) return PlanTypes.pro;
+
+    return PlanTypes.advanced;
+  };
+  const getServices = () => {
+    let servicesList: Array<{ name: string; value: number }> = [];
+
+    if (services.customizableProfile)
+      servicesList.push({
+        name: "Customizable profile",
+        value: 2,
+      });
+    if (services.largerStorage)
+      servicesList.push({
+        name: "Larger storage",
+        value: 2,
+      });
+    if (services.onlineService)
+      servicesList.push({
+        name: "Online service",
+        value: 1,
+      });
+
+    return servicesList;
+  };
+
+  const navigateToSelectPlan = () => {
+    setStep(2);
+  };
+
   const getStepComponent = () => {
+    if (finished) return <ThankYou />;
     const mapComponents = [
       <PersonalInfo
         phone={phone}
@@ -139,6 +183,20 @@ export const Mobile = () => {
         handleCards={handleCards}
         incrementStep={incrementStep}
         goBack={decrementStep}
+      />,
+      <AddOns
+        services={services}
+        handleServices={setServices}
+        goBack={decrementStep}
+        incrementStep={incrementStep}
+      />,
+      <FinishingUp
+        onConfirm={incrementStep}
+        goBack={decrementStep}
+        services={getServices()}
+        plan={getPlan()}
+        isYearly={switchState}
+        onChangePress={navigateToSelectPlan}
       />,
     ];
 
@@ -160,11 +218,13 @@ export const Mobile = () => {
         <CardWrapper>{getStepComponent()}</CardWrapper>
       </ImageWrapper>
       <ContentSeparator></ContentSeparator>
-      <ButtonsWrapper hasGoBack={step !== 1}>
-        {step !== 1 && <GoBack onClick={decrementStep}>{"Go Back"}</GoBack>}
+      {step < 5 && (
+        <ButtonsWrapper hasGoBack={step !== 1}>
+          {step !== 1 && <GoBack onClick={decrementStep}>{"Go Back"}</GoBack>}
 
-        <NextStep onClick={onNextStep}>{"Next Step"}</NextStep>
-      </ButtonsWrapper>
+          <NextStep onClick={onNextStep}>{"Next Step"}</NextStep>
+        </ButtonsWrapper>
+      )}
     </MainWrapper>
   );
 };

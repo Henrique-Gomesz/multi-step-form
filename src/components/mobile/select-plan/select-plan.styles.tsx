@@ -6,12 +6,10 @@ export const MainWrapper = styled(Box)`
   width: 100%;
   display: flex;
   flex-direction: column;
-  padding:  16px 16px;
- 
+  padding: 16px 16px;
 `;
 
-export const TitleWrapper = styled(Box)`
-`;
+export const TitleWrapper = styled(Box)``;
 
 export const Title = styled.p`
   font-size: 6.5vw;
@@ -24,8 +22,8 @@ export const SubtitleWrapper = styled(Box)`
 `;
 
 export const IndividualCardWrapper = styled(Box)`
-margin-bottom: 8px;
-`
+  margin-bottom: 8px;
+`;
 
 export const Subtitle = styled.p`
   margin-top: 6px;
@@ -38,7 +36,9 @@ export const CardsWrapper = styled(Box)`
   margin-top: 40px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+
+
+  align-items: center;
 `;
 
 export const SwitchWrapper = styled(Box)`
